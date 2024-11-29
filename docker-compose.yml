@@ -12,3 +12,12 @@ services:
       - POSTGRES_USER=admin123
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+  backend:
+    image: frenchtool-api:1.0.0
+    restart: always
+    environment:
+      - POSTGRESS_CONNECTION=Server=main_db;Port=5432;Database=FrenchTool;Username=admin123;Password=admin123
+    ports:
+      - 5022:8080
+    depends_on:
+        - main_db
